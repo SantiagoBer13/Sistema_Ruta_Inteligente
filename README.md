@@ -18,8 +18,8 @@ Este proyecto implementa un sistema de búsqueda de rutas óptimas en un transpo
 ## 🛠️ Instalación
 1. Clona este repositorio:
    ```sh
-   git clone https://github.com/tu-usuario/tu-repo.git
-   cd tu-repo
+   git clone https://github.com/SantiagoBer13/Sistema_Ruta_Inteligente.git
+   cd Sistema_Ruta_Inteligente
    ```
 2. Crea y activa un entorno virtual
     ```
