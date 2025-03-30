@@ -1,35 +1,29 @@
-from kanren import Relation, facts, run, var
+from kanren import Relation, facts, run, var, conde
 
 # Definimos una relación "conectado"
 conectado = Relation()
 
-# Agregamos hechos (conexiones entre estaciones)
 facts(conectado, 
-      ("A", "B"), ("B", "C"), ("A", "D"),
-      ("C", "D"), ("D", "E"), ("C", "E"),("A","E"))
+      ("A", "B", 1), ("B", "C", 2), ("A", "D", 4),
+      ("C", "D", 1), ("D", "E", 3), ("C", "E", 2), ("A", "E", 10))
 
-# Función recursiva para encontrar una ruta entre dos puntos
-def ruta(origen, destino, camino=[]):
+def ruta(origen, destino, camino=[], costo_total=0):
     if origen == destino:
-        return [camino + [destino]]
+        return [(camino + [destino], costo_total)]
 
     posibles_rutas = []
-    x = var()  # Variable lógica
+    x, peso = var(), var()
 
-    # Buscamos nodos conectados con el origen
-    conexiones = run(0, x, conectado(origen, x))  # Se usa correctamente `conectado(origen, x)`
+    conexiones = run(0, (x, peso), conectado(origen, x, peso))
 
-    for siguiente in conexiones:
-        if siguiente not in camino:  # Evitamos ciclos
-            nuevas_rutas = ruta(siguiente, destino, camino + [origen])
+    for siguiente, costo in conexiones:
+        if siguiente not in camino:
+            nuevas_rutas = ruta(siguiente, destino, camino + [origen], costo_total + costo)
             posibles_rutas.extend(nuevas_rutas)
 
     return posibles_rutas
 
-# Ejecutamos la búsqueda de la mejor ruta de A a E
 rutas = ruta("A", "E")
 if rutas:
     print("Posibles rutas:", rutas)
-    print("La mejor ruta es:", min(rutas, key=len))  # Escogemos la más corta
-else:
-    print("No hay ruta disponible de A a E.")
+    print("La mejor ruta es:", min(rutas, key=lambda r: r[1]))  # Ruta con menor costo
