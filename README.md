@@ -9,8 +9,9 @@ Este proyecto implementa un sistema de búsqueda de rutas óptimas en un transpo
 
 ## 📋 Requisitos
 
-1. Python 3.6 o superior
-2. Bibliotecas:
+1. Editor de Codigo (VS Code o PyCharm)
+2. Python 3.6 o superior
+3. Bibliotecas:
     - Kanren (lógica relacional)
     - NetworkX (representación y visualización de grafos)
     - Matplotlib (visualización)
@@ -36,7 +37,7 @@ Este proyecto implementa un sistema de búsqueda de rutas óptimas en un transpo
 ## 📌 Uso
 1. Ejecuta el script principal:
     ```
-    python script.py
+    python SI_Sistema_Transporte.py
     ```
     Se mostrará la mejor ruta entre los puntos definidos y una representación gráfica.
 ## 📝 Autor
